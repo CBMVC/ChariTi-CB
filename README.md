@@ -9,9 +9,9 @@ The ChariTi-CB version will synchronizes with ChariTi.
 
 There are following enhancement with ChariTi-CB in version 1.2.2
 
-### 1. Support custom multiple language. You can switch the current language in the code and don't need to base on the phone setting.
+#### 1. Support custom multiple language. You can switch the current language in the code and don't need to base on the phone setting.
 
-#### How to use:
+##### How to use:
     1) Set the default lanuguage in the /lib/data/app.json file:  `"defaultLanguage": "en",`
     2) Create the language key/value resource file and put in the /lib/langs folder, ect. `en.js`
     3) Use the `APP.L('langKey')` for display the language content.
@@ -19,9 +19,9 @@ There are following enhancement with ChariTi-CB in version 1.2.2
     5) For the tab text, the tab's title in the app.json file is the language resource's key.
     6) If you don't need to support multiple language, just set the `"isMultiLanguage"` to false in the app.json file.
 
-### 2. Support slide left, right, top and down animation when you switch the page.
+#### 2. Support slide left, right, top and down animation when you switch the page.
 
-#### How to use:
+##### How to use:
 In ChariTi, you can use `APP.addChild` to switch the page, and in ChariTi-CB, I have enhance this function, the following is the function signature:
 
     /**
@@ -74,11 +74,11 @@ When you use the slide right animation to next page, you should also want to use
         });
     });
 
-### 3. You can change the Database name in the core.js file in line 122.
+#### 3. You can change the Database name in the core.js file in line 122.
 
-### 4. For some reasons, maybe you don't want to use the ChariTi default setting button, so in this time, you can easy set the `useDefaultSettingButton` to false in the app.json file.
+#### 4. For some reasons, maybe you don't want to use the ChariTi default setting button, so in this time, you can easy set the `useDefaultSettingButton` to false in the app.json file.
 
-### 5. Enhance the `APP.log` function. You can dump the js object in this function. Follow is the function signature:
+#### 5. Enhance the `APP.log` function. You can dump the js object in this function. Follow is the function signature:
 
     /**
      * Logs all console data
@@ -102,9 +102,9 @@ Then the result will be:
 
     {id:1,name:'test'}=====in test file line 10
 
-### 6. By default, ChariTi will save all default information into DB, if you don't want to do it, you can set the `logToDB` to false in app.json.
+#### 6. By default, ChariTi will save all debug(APP.log) information into DB, if you don't want to do it, you can set the `logToDB` to false in app.json.
 
-### 7. Enhance the update function, you can set the app store and google play url in app.json, if the `minimumVersion` is not support udpate, the app can popup the user go to the app store(android with google play) for download the app.
+#### 7. Enhance the update function, you can set the app store and google play url in app.json, if the `minimumVersion` is not support udpate, the app can popup the user go to the app store(android with google play) for download the app.
 
 
 
