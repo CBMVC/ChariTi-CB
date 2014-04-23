@@ -1,7 +1,7 @@
 ChariTi-CB
 ==========
 
-ChariTi is a great alloy framework, and it's open source!
+[ChariTi](https://github.com/mcongrove/ChariTi) is a great alloy framework, and it's open source!
 
 This is a ChariTi enhancement version by me, I have added more features within ChariTi framework :)
 
