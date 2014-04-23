@@ -1,0 +1,11 @@
+"#Wrapper": {
+	layout: "vertical"
+},
+"#container": {
+	scalesPageToFit: true,
+	willHandleTouches: false,
+	top: "0dp",
+	height: Ti.UI.FILL,
+	width: Ti.UI.FILL,
+	backgroundColor: "#000"
+}

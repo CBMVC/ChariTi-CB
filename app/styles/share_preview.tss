@@ -1,0 +1,53 @@
+"#Wrapper": {
+	layout: "vertical"
+},
+"#container": {
+	top: "0dp",
+	height: Ti.UI.FILL,
+	width: Ti.UI.FILL
+},
+"#preview": {
+	backgroundColor: "#FFF",
+	top: "0dp",
+	left: "0dp",
+	right: "0dp",
+	bottom: "53dp",
+	layout: "vertical",
+	showVerticalScrollIndicator: true
+},
+"#title": {
+	top: "20dp",
+	left: "15dp",
+	right: "15dp",
+	height: Ti.UI.SIZE,
+	font: {
+		fontSize: "16dp",
+		fontFamily: "HelveticaNeue-Bold"
+	},
+	color: "#000"
+},
+"#text": {
+	top: "10dp",
+	left: "15dp",
+	right: "15dp",
+	bottom: "20dp",
+	height: Ti.UI.SIZE,
+	font: {
+		fontSize: "14dp",
+		fontFamily: "HelveticaNeue"
+	},
+	color: "#333"
+},
+"#buttonConfirm": {
+	bottom: "0dp",
+	left: "0dp",
+	right: "0dp",
+	height: "53dp",
+	backgroundColor: "#EBEBEB",
+	font: {
+		fontSize: "23dp",
+		fontFamily: "HelveticaNeue-Medium"
+	},
+	color: "#000",
+	textAlign: "center"
+}

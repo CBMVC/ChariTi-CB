@@ -1,0 +1,11 @@
+<Alloy>
+	<View id="Wrapper" name="Youtube">
+		<Require type="widget" src="com.mcongrove.navigationBar" id="NavigationBar" image="data/logo.png" />
+		
+		<View id="tableWrapper">
+			<TableView id="container">
+				<Widget id="ptr" src="nl.fokkezb.pullToRefresh" onRelease="ptrRelease" />
+			</TableView>
+		</View>
+	</View>
+</Alloy>

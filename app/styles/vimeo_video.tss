@@ -1,0 +1,7 @@
+"#Wrapper": {
+	backgroundColor: "#FFF",
+	layout: "vertical"
+},
+"#container": {
+	top: "0dp"
+}

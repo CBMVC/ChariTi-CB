@@ -1,0 +1,7 @@
+<Alloy>
+	<View id="Wrapper" name="Settings Legal">
+		<Require type="widget" src="com.mcongrove.navigationBar" id="NavigationBar" image="data/logo.png" />
+		
+		<WebView id="container" />
+	</View>
+</Alloy>

@@ -1,0 +1,11 @@
+<Alloy>
+	<View id="Wrapper" name="Facebook Article">
+		<Require type="widget" src="com.mcongrove.navigationBar" id="NavigationBar" />
+		
+		<ScrollView id="container">
+			<Label id="heading" />
+			<Label id="date" />
+			<TextArea id="text" />
+		</ScrollView>
+	</View>
+</Alloy>

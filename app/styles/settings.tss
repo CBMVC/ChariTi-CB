@@ -1,0 +1,47 @@
+"#Wrapper": {
+	layout: "vertical"
+},
+"#container": {
+	top: "0dp",
+	backgroundColor: "#EEE",
+	contentWidth: "auto",
+	contentHeight: "auto",
+	layout: "vertical"
+},
+"TableView": {
+	right: "0dp",
+	left: "0dp",
+	top: "20dp",
+	separatorColor: "#EEE",
+	rowHeight: "45dp",
+	backgroundColor: "#FFF",
+	scrollable: false
+},
+"TableViewRow": {
+	selectedBackgroundColor: "#DDD",
+	font: {
+		fontSize: "17dp",
+		fontFamily: "HelveticaNeue-Light"
+	},
+	color: "#000",
+	selectedColor: "#000",
+	height: "45dp"
+},
+"Label": {
+	color: "#666",
+	font: {
+		fontSize: "14dp",
+		fontFamily: "HelveticaNeue"
+	},
+	top: "5dp",
+	left: "15dp",
+	right: "15dp",
+	height: Ti.UI.SIZE,
+	textAlign: "left"
+},
+"#copyright": {
+	top: "20dp"
+},
+"#chariti": {
+	bottom: "20dp"
+}

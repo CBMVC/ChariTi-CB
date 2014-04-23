@@ -1,0 +1,38 @@
+"#Wrapper": {
+	height: Ti.UI.SIZE,
+	selectedBackgroundColor: "#EEE",
+	backgroundColor: "#FFF"
+},
+"#container": {
+	height: Ti.UI.SIZE,
+	layout: "vertical",
+	top: "0dp",
+	left: "0dp"
+},
+"#heading": {
+	top: "15dp",
+	left: "15dp",
+	right: "33dp",
+	height: Ti.UI.SIZE,
+	font: {
+		fontSize: "18dp",
+		fontFamily: "HelveticaNeue-Light"
+	},
+	color: "#000"
+},
+"#subHeading": {
+	left: "15dp",
+	right: "33dp",
+	bottom: "15dp",
+	height: Ti.UI.SIZE,
+	font: {
+		fontSize: "12dp",
+		fontFamily: "HelveticaNeue"
+	},
+	color: "#000"
+},
+"#arrow": {
+	width: "8dp",
+	height: "13dp",
+	right: "15dp"
+}

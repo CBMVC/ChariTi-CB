@@ -1,0 +1,10 @@
+"#Wrapper": {
+	layout: "vertical"
+},
+"#container": {
+	top: "0dp",
+	backgroundColor: "#EEE",
+	rowHeight: "48dp",
+	separatorColor: "#DDD",
+	scrollsToTop: true
+}

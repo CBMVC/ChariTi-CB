@@ -1,0 +1,68 @@
+"#Wrapper": {
+	backgroundColor: "#FFF",
+	layout: "vertical"
+},
+"#container": {
+	top: "0dp",
+	layout: "vertical",
+	showVerticalScrollIndicator: true
+},
+"#heading": {
+	top: "15dp",
+	left: "15dp",
+	right: "15dp",
+	height: Ti.UI.SIZE,
+	font: {
+		fontSize: "18dp",
+		fontFamily: "HelveticaNeue-Light"
+	}
+},
+"#date": {
+	top: "5dp",
+	left: "15dp",
+	right: "15dp",
+	height: Ti.UI.SIZE,
+	font: {
+		fontSize: "11dp",
+		fontFamily: "HelveticaNeue"
+	},
+	color: "#000"
+},
+"#location": {
+	top: "5dp",
+	left: "15dp",
+	right: "15dp",
+	height: Ti.UI.SIZE,
+	font: {
+		fontSize: "11dp",
+		fontFamily: "HelveticaNeue"
+	},
+	color: "#000"
+},
+"#photoContainer": {
+	top: "10dp",
+	left: "15dp",
+	right: "15dp",
+	height: Ti.UI.SIZE
+},
+"#photo": {
+	preventDefaultImage: true,
+	width: Ti.UI.FILL,
+	top: "0dp",
+	left: "0dp"
+},
+"#text": {
+	top: "10dp",
+	left: "6dp",
+	right: "6dp",
+	bottom: "15dp",
+	height: Ti.UI.SIZE,
+	font: {
+		fontSize: "14dp",
+		fontFamily: "HelveticaNeue"
+	},
+	color: "#000",
+	backgroundColor: "transparent",
+	editable: false,
+	autoLink: Ti.UI.AUTOLINK_URLS
+}

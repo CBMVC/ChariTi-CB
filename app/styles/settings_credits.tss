@@ -1,0 +1,24 @@
+"#Wrapper": {
+	layout: "vertical"
+},
+"#container": {
+	top: "0dp",
+	backgroundColor: "#FFF",
+	contentWidth: "auto",
+	contentHeight: "auto",
+	layout: "vertical"
+},
+"Label": {
+	top: "15dp",
+	left: "15dp",
+	right: "15dp",
+	height: Ti.UI.SIZE,
+	font: {
+		fontSize: "14dp",
+		fontFamily: "HelveticaNeue"
+	},
+	color: "#000"
+},
+".last": {
+	bottom: "15dp"
+}

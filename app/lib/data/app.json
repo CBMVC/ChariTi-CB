@@ -1,0 +1,184 @@
+{
+	"id": "ChariTi-CB.001",
+	"version": "1.0",
+	"minimumVersion": "1.0",
+	"configurationUrl": "",
+    "appStoreLink":"https://itunes.apple.com/en/app/chariti",
+    "googlePlayLink":"https://play.google.com/store/apps/details?id=chariti.com",
+    "defaultLanguage": "en",
+    "isMultiLanguage": true,
+    "startupScreen": 3,
+    "tabletSupport": false,
+    "useDefaultSettingButton": true,
+    "logToDB": false,
+	"legal": {
+		"copyright": "Copyright ‌2013 ChariTi",
+		"terms": "http://www.appcelerator.com/legal/terms-conditions/",
+		"privacy": "https://policy-portal.truste.com/core/privacy-policy/ChariTi/04175946-6006-4c76-b174-6bc589432474"
+	},
+	"settings": {
+		"share": "Check out this great ChariTi content",
+		"notifications": {
+			"enabled": false,
+			"provider": "UA",
+			"key": "AuKi5Qn3QKGTno3xX9ECYA",
+			"secret": "s-RDQejhRwmx-j4DCaXPMw"
+		},
+		"colors": {
+			"primary": "#327B9F",
+			"secondary": "#569BBE"
+		},
+		"useSlideMenu": true
+	},
+	"manifest": [
+		"http://chariti.mobi/app/logo.png",
+		"http://chariti.mobi/app/logo@2x.png"
+	],
+	"tabs": [
+		{
+			"menuHeader": "My Tabs",
+			"title": "Text",
+			"heading": "Open Source Mobile Framework for Charities",
+			"text": "The ChariTi framework is built to allow the often-times small team of staffers at charities around the world to build a mobile application. This is achieved by removing the requirement for a highly-knowledgeable technical staff or costly app development firm and instead allowing app creation and management by anyone from a marketing director to an intern.",
+			"type": "text",
+			"image": "chariti",
+			"tabletSupport": false
+		},
+		{
+			"title": "Podcast",
+			"feed": "http://feeds.feedburner.com/TEDTalks_audio",
+			"type": "podcast",
+			"image": "audio2",
+			"cache": 1440,
+			"tabletSupport": true
+		},
+		{
+			"title": "Facebook",
+			"userid": "20594753592",
+			"type": "facebook",
+			"image": "facebook",
+			"cache": 1440,
+			"tabletSupport": true
+		},
+		{
+			"title": "Blog",
+			"feed": "http://developer.appcelerator.com/blog/feed",
+			"type": "article",
+			"image": "news",
+			"cache": 120,
+			"tabletSupport": true
+		},
+		{
+			"title": "Flickr",
+			"username": "39494278@N04",
+			"apiKey": "e067644d8af6a8a9f2f36f8abbe32720",
+			"type": "flickr",
+			"image": "photo",
+			"cache": 1440,
+			"tabletSupport": true
+		},
+		{
+			"menuHeader": "More Tabs",
+			"title": "Events",
+			"userid": "7304307941",
+			"type": "event",
+			"image": "event",
+			"cache": 1440,
+			"tabletSupport": true
+		},
+		{
+			"title": "Vimeo",
+			"username": "appcelerator",
+			"type": "vimeo",
+			"image": "video2",
+			"cache": 1440,
+			"tabletSupport": true
+		},
+		{
+			"title": "Share",
+			"templates": [
+				{
+					"title": "Help Wanted",
+					"text": "Did you know that mobile apps can cost charities nearly $50,000 to build?<br /><br />That's why I've donated my time to help develop ChariTi, an initiative that aims to help charities build useful applications for iPhone, Android, and more. The best part is that these ChariTi apps can be created in 30 minutes instead of 30 days, and cost the charities absolutely nothing.<br /><br />Consider joining me in helping ChariTi; developers, designers, and testers are much needed. Visit the <a href='http://chariti.mobi'>ChariTi website</a> and find out how you can help."
+				},
+				{
+					"title": "Code Donations Welcome",
+					"text": "Did you know that mobile apps can cost charities nearly $50,000 to build?<br /><br />That's why I've donated my time to help develop ChariTi, an initiative that aims to help charities build useful applications for iPhone, Android, and more. The best part is that these ChariTi apps can be created in 30 minutes instead of 30 days, and cost the charities absolutely nothing.<br /><br />Consider joining me in helping ChariTi; developers, designers, and testers are much needed. Visit the <a href='http://chariti.mobi'>ChariTi website</a> and find out how you can help."
+				}
+			],
+			"type": "share",
+			"image": "social",
+			"tabletSupport": true
+		},
+		{
+			"title": "Donate",
+			"heading": "Donate to ChariTi",
+			"text": "ChariTi is a framework built to allow charities to quickly and easily create mobile apps.\n\nWe don't want your money, we just want your code.",
+			"url": "https://github.com/mcongrove/ChariTi",
+			"type": "donate",
+			"image": "donate2",
+			"tabletSupport": false
+		}
+	],
+	"examples": [
+		{
+			"title": "Map",
+			"points": [
+				{
+					"latitude": "28.24560022171899",
+					"longitude": "-80.72571516036987",
+					"pinColor": "RED",
+					"title": "Place A",
+					"subTitle": "This is a subtitle"
+				},
+				{
+					"latitude": "28.24704626421908",
+					"longitude": "-80.73882579803467",
+					"pinColor": "GREEN",
+					"title": "Place B",
+					"subTitle": "This is another subtitle"
+				},
+				{
+					"latitude": "28.228406881099808",
+					"longitude": "-80.73399782180786",
+					"pinColor": "PURPLE",
+					"title": "Place C",
+					"subTitle": ""
+				}
+			],
+			"type": "map",
+			"image": "map",
+			"tabletSupport": false
+		},
+		{
+			"title": "News",
+			"feed": "http://developer.appcelerator.com/blog/feed",
+			"type": "article",
+			"image": "news",
+			"cache": 120,
+			"tabletSupport": true
+		},
+		{
+			"title": "PDF",
+			"url": "http://www.appcelerator.com.s3.amazonaws.com/pdf/casestudy_nbc.pdf",
+			"type": "pdf",
+			"image": "book",
+			"tabletSupport": false
+		},
+		{
+			"title": "YouTube",
+			"username": "appcelerator",
+			"type": "youtube",
+			"image": "video2",
+			"cache": 1440,
+			"tabletSupport": true
+		},
+		{
+			"title": "Web",
+			"url": "https://github.com/mcongrove/ChariTi",
+			"type": "web",
+			"image": "home",
+			"tabletSupport": false
+		}
+	]
+}
