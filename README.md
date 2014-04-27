@@ -7,7 +7,32 @@ This is a ChariTi enhancement version by me, I have added more features within C
 
 The ChariTi-CB version will synchronizes with ChariTi.
 
-There are following enhancement with ChariTi-CB in version 1.2.2
+# Version 1.0.1
+
+There are following enhancement with ChariTi-CB in version 1.0.1, base on ChariTi 1.2.2
+
+#### Enhance the remove children function. Please consider the following scenarios:
+    There are 4 screens, you need to use the `APP.addChild` to navigate them: `screen1 -> screen2 -> screen3 -> screen4`, after you go into screen4, and you want to back to screen2, by default ChariTi just can back one screen with the `APP.removeChild()` function, or you can use the `APP.addChild` to add to screen2, but in this way, the controller stack will keep to increase, so we should use the `APP.removeChild` for remove the screen4 and screen3 after switch back to screen2. In this case, I enhanced the `APP.removeChild` function to support remove to define screen:
+
+        /**
+         * Removes a child screen
+         * @param {String} controller The controller name need to be back and remove from the stack
+         * @param {Boolean} modal Removes the child from the modal stack
+         * @param {Boolean} animation The animation of the navigation
+         */
+        removeChild: function(_params)
+
+    For example, in the above case, just use the function like follow:
+
+        APP.removeChild({
+            controller: 'screen2',
+            animation: APP.AnimationStyle.SlideLeft
+        });
+
+
+# Version 1.0
+
+There are following enhancement with ChariTi-CB in version 1.0, base on ChariTi 1.2.2
 
 #### 1. Support custom multiple language. You can switch the current language in the code and don't need to base on the phone setting.
 

@@ -28,6 +28,11 @@ var APP = {
 	 */
 	VERSION: null,
 	/**
+	 * ChariTi-CB  version
+	 * @type {String}
+	 */
+	CBCVERSION: "1.0.1",
+	/**
 	 * ChariTi framework version
 	 * @type {String}
 	 */
@@ -852,6 +857,8 @@ var APP = {
 
 		// Create the new screen controller
 		var screen = Alloy.createController(_params.controller, _params.params).getView();
+		// Set the screen name
+		screen.name = _params.controller;
 
 		if(_params.sibling) {
 			stack.pop();
@@ -866,6 +873,8 @@ var APP = {
 		} else {
 			APP.addDetailScreen(screen, _params.animation);
 		}
+
+		APP.log("debug", stack.length, "stack length line 870:");
 	},
 	/**
 	 * Removes a child screen
@@ -884,12 +893,19 @@ var APP = {
 				stack = APP.controllerStacks[APP.currentStack];
 			}
 		}
-
-		var screen = stack[stack.length - 1];
+		//default just remove one screen
+		var removeIndex = stack.length - 1;
+		if(_params.toIndex) {
+			//remove to the define index screen
+			removeIndex = _params.toIndex;
+		}
 		var previousStack;
 		var previousScreen;
-
-		stack.pop();
+		var stackLength = stack.length;
+		//popup the stacks
+		for(var removeItem = removeIndex; removeItem < stackLength; removeItem++) {
+			stack.pop();
+		}
 
 		if(stack.length === 0) {
 			previousStack = APP.controllerStacks[APP.currentStack];
@@ -908,6 +924,7 @@ var APP = {
 				}
 			}
 		} else {
+
 			previousScreen = stack[stack.length - 1];
 
 			if(APP.Device.isHandheld || !APP.hasDetail) {
@@ -1172,7 +1189,7 @@ var APP = {
 	closeSettings: function() {
 		if(APP.modalStack.length > 0 && APP.UseDefaultSettingButton) {
 			// APP.removeChild({
-			// 	modal: true
+			//  modal: true
 			// });
 			APP.removeChild({
 				model: true
