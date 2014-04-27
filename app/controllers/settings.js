@@ -86,7 +86,7 @@ $.privacy.addEventListener("click", function(_event) {
 			title: "Privacy Policy",
 			url: APP.LEGAL.PRIVACY
 		},
-		modal: true
+		modal: true,
 		animation: APP.AnimationStyle.SlideRight
 	});
 });
@@ -97,7 +97,7 @@ $.acknowledgements.addEventListener("click", function(_event) {
 	//APP.addChild("settings_credits", {}, true);
 	APP.addChild({
 		controller: "settings_credits",
-		modal: true
+		modal: true,
 		animation: APP.AnimationStyle.SlideRight
 	});
 });
