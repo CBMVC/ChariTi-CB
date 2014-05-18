@@ -1,269 +1,264 @@
-Welcome to StackEdit!		
+[『Cmd 技术渲染的沙箱页面，点击此处编写自己的文档』](https://www.zybuluo.com/mdeditor "作业部落旗下 Cmd 在线 Markdown 编辑阅读器")
 
+# Cmd Markdown 简明语法手册
 
-----------
+标签： Cmd-Markdown
 
+---
 
-----------
+### 1. 斜体和粗体
 
+使用 * 和 ** 表示斜体和粗体。
 
-====================
+示例：
 
+这是 *斜体*，这是 **粗体**。
 
-Hello, I am your first `Markdown` document within **StackEdit**[^stackedit]. Don't delete me, I can be helpful. I can be recovered anyway in the `Utils` tab of the <i class="icon-cog"></i> `Settings` dialog.
+### 2. 分级标题
 
-----------
+使用 === 表示一级标题，使用 --- 表示二级标题。
 
-
-Documents
---------------
-
-**StackEdit** stores your documents in your browser, which means all your documents are automatically saved locally and are accessible **offline!**
-
-> **Note:**
-
-> - StackEdit is accessible offline after the application has been loaded for the first time.
-> - Your local documents are not shared between different browsers or computers.
-> - Clearing your browser's data may **delete all your local documents!** Make sure your documents are backed up using **Google Drive** or **Dropbox** synchronization (see [<i class="icon-refresh"></i> Synchronization](#synchronization) section).
-
-#### <i class="icon-file"></i> Create a document
-
-The document panel is accessible using  <i class="icon-folder-open"></i> button in the navigation bar. You can create a new document by clicking the <i class="icon-file"></i> `New document` sub-menu in the document panel.
-
-#### <i class="icon-folder-open"></i> Switch to another document
-
-All your local documents are listed in the document panel. You can switch from one to another by clicking a document in the document panel or you can also use <kbd>Ctrl+[</kbd> and <kbd>Ctrl+]</kbd> to toggle documents by most recently used.
-
-#### <i class="icon-pencil"></i> Rename a document
-
-You can rename the current document by clicking the document title in the navigation bar.
-
-#### <i class="icon-trash"></i> Delete a document
-
-You can delete the current document by clicking the <i class="icon-trash"></i> `Delete document` sub-menu in the document panel.
-
-#### <i class="icon-hdd"></i> Export a document
-
-You can save the current document to a file using the <i class="icon-hdd"></i> `Export to disk` sub-menu from the <i class="icon-provider-stackedit"></i> menu panel.
-
-> **Tip:** See [<i class="icon-upload"></i> Publish a document](#publish-a-document) section for a description of the different output formats.
-
-
-----------
-
-
-Synchronization
---------------------
-
-**StackEdit** can be combined with <i class="icon-provider-gdrive"></i> **Google Drive** and <i class="icon-provider-dropbox"></i> **Dropbox** to have your documents centralized in the *Cloud*. The synchronization mechanism will take care of uploading your modifications or downloading the latest version of your documents.
-
-> **Note:**
-
-> - Full access to **Google Drive** or **Dropbox** is required to be able to import any document in StackEdit. Permission restrictions can be configured in the settings.
-> - Imported documents are downloaded in your browser and are not transmitted to a server.
-> - If you experience problems saving your documents on Google Drive, check and optionally disable browser extensions, such as Disconnect.
-
-#### <i class="icon-refresh"></i> Open a document
-
-You can open a document from <i class="icon-provider-gdrive"></i> **Google Drive** or the <i class="icon-provider-dropbox"></i> **Dropbox** by opening the <i class="icon-refresh"></i> `Synchronize` sub-menu and by clicking `Open from...`. Once opened, any modification in your document will be automatically synchronized with the **Google Drive** / **Dropbox** file.
-
-#### <i class="icon-refresh"></i> Save a document
-
-You can save any document by opening the <i class="icon-refresh"></i> `Synchronize` sub-menu and by clicking `Save on...`. Even if your document is already synchronized with **Google Drive** or **Dropbox**, you can export it to a another location. **StackEdit** can synchronize one document with multiple locations.
-
-#### <i class="icon-refresh"></i> Synchronize a document
-
-Once your document is linked to a <i class="icon-provider-gdrive"></i> **Google Drive** or a <i class="icon-provider-dropbox"></i> **Dropbox** file, **StackEdit** will periodically (every 3 minutes) synchronize it by downloading/uploading any modification. Any conflict will be detected, and a local copy of your document will be created as a backup if necessary.
-
-If you just have modified your document and you want to force the synchronization, click the <i class="icon-refresh"></i> button in the navigation bar.
-
-> **Note:** The <i class="icon-refresh"></i> button is disabled when you have no document to synchronize.
-
-#### <i class="icon-refresh"></i> Manage document synchronization
-
-Since one document can be synchronized with multiple locations, you can list and manage synchronized locations by clicking <i class="icon-refresh"></i> `Manage synchronization` in the <i class="icon-refresh"></i> `Synchronize` sub-menu. This will let you remove synchronization locations that are associated to your document.
-
-> **Note:** If you delete the file from **Google Drive** or from **Dropbox**, the document will no longer be synchronized with that location.
-
-----------
-
-
-Publication
---------------
-
-Once you are happy with your document, you can publish it on different websites directly from **StackEdit**. As for now, **StackEdit** can publish on **Blogger**, **Dropbox**, **Gist**, **GitHub**, **Google Drive**, **Tumblr**, **WordPress** and on any SSH server.
-
-#### <i class="icon-upload"></i> Publish a document
-
-You can publish your document by opening the <i class="icon-upload"></i> `Publish` sub-menu and by choosing a website. In the dialog box, you can choose the publication format:
-
-- Markdown, to publish the Markdown text on a website that can interpret it (**GitHub** for example),
-- HTML, to publish the document converted into HTML (on a blog for example),
-- Template, to have a full control of the output.
-
-> **Note:** The default template is a simple webpage wrapping your document in HTML format. You can customize it in the `Advanced` tab of the <i class="icon-cog"></i> `Settings` dialog.
-
-#### <i class="icon-upload"></i> Update a publication
-
-After publishing, **StackEdit** will keep your document linked to that publication which makes it easy for you to update it. Once you have modified your document and you want to update your publication, click on the <i class="icon-upload"></i> button in the navigation bar.
-
-> **Note:** The <i class="icon-upload"></i> button is disabled when your document has not been published yet.
-
-#### <i class="icon-upload"></i> Manage document publication
-
-Since one document can be published on multiple locations, you can list and manage publish locations by clicking <i class="icon-upload"></i> `Manage publication` in the <i class="icon-provider-stackedit"></i> menu. This will let you remove publication locations that are associated to your document.
-
-> **Note:** In some cases, if the file has been removed from the website or the blog, the document will no longer be published on that location.
-
-----------
-
-
-Markdown Extra
---------------------
-
-**StackEdit** supports **Markdown Extra**, which extends **Markdown** syntax with some nice features.
-
-> **Tip:** You can disable any **Markdown Extra** feature in the `Extensions` tab of the <i class="icon-cog"></i> `Settings` dialog.
-
-> **Note:** You can find more information about **Markdown** syntax [here][2] and **Markdown Extra** extension [here][3].
-
-
-### Tables
-
-**Markdown Extra** has a special syntax for tables:
-
-Item | Value
---- | ---
-Computer | $1600
-Phone | $12
-Pipe | $1
-
-You can specify column alignment with one or two colons:
-
-| Item | Value | Qty |
-| :--- | ---: | :---: |
-| Computer | $1600 | 5 |
-| Phone | $12 | 12 |
-| Pipe | $1 | 234 |
-
-
-### Definition Lists
-
-**Markdown Extra** has a special syntax for definition lists too:
-
-Term 1
-Term 2
-:   Definition A
-:   Definition B
-
-Term 3
-
-:   Definition C
-
-:   Definition D
-
-	> part of definition D
-
-
-### Fenced code blocks
-
-GitHub's fenced code blocks[^gfm] are also supported with **Prettify** syntax highlighting:
+示例：
 
 ```
-// Foo
-var bar = 0;
+这是一个一级标题
+============================
+
+这是一个二级标题
+--------------------------------------------------
+
+### 这是一个三级标题
 ```
 
-> **Tip:** To use **Highlight.js** instead of **Prettify**, just configure the `Markdown Extra` extension in the <i class="icon-cog"></i> `Settings` dialog.
+你也可以选择在行首加井号表示不同级别的标题 (H1-H6)，例如：# H1, ## H2, ### H3，#### H4。
 
-> **Note:** You can find more information:
+### 3. 外链接
 
-> - about **Prettify** syntax highlighting [here][5],
-> - about **Highlight.js** syntax highlighting [here][6].
+使用 \[描述](链接地址) 为文字增加外链接。
 
+示例：
 
-### Footnotes
+这是去往 [本人博客](http://ghosertblog.github.com) 的链接。
 
-You can create footnotes like this[^footnote].
+### 4. 无序列表
 
-  [^footnote]: Here is the *text* of the **footnote**.
+使用 *，+，- 表示无序列表。
 
+示例：
 
-### SmartyPants
+- 无序列表项 一
+- 无序列表项 二
+- 无序列表项 三
 
-SmartyPants converts ASCII punctuation characters into "smart" typographic punctuation HTML entities. For example:
+### 5. 有序列表
 
-| | ASCII | HTML |
----|---|---
-| Single backticks | `'Isn't this fun?'` | 'Isn't this fun?' |
-| Quotes | `"Isn't this fun?"` | "Isn't this fun?" |
-| Dashes | `-- is en-dash, --- is em-dash` | -- is en-dash, --- is em-dash |
+使用数字和点表示有序列表。
 
+示例：
 
-### Table of contents
+1. 有序列表项 一
+2. 有序列表项 二
+3. 有序列表项 三
 
-You can insert a table of contents using the marker `[TOC]`:
+### 6. 文字引用
+
+使用 > 表示文字引用。
+
+示例：
+
+> 野火烧不尽，春风吹又生。
+
+### 7. 行内代码块
+
+使用 \`代码` 表示行内代码块。
+
+示例：
+
+让我们聊聊 `html`。
+
+### 8.  代码块
+
+使用 四个缩进空格 表示代码块。
+
+示例：
+
+    这是一个代码块，此行左侧有四个不可见的空格。
+
+### 9.  插入图像
+
+使用 \!\[描述](图片链接地址) 插入图像。
+
+示例：
+
+![我的头像](https://www.zybuluo.com/static/img/my_head.jpg)
+
+# Cmd Markdown 高阶语法手册
+
+### 1. 内容目录
+
+在段落中填写 `[TOC]` 以显示全文内容的目录结构。
 
 [TOC]
 
+### 2. 标签分类
 
-### MathJax
+在编辑区任意行的列首位置输入以下代码给文稿标签：
 
-You can render *LaTeX* mathematical expressions using **MathJax**, as on [math.stackexchange.com][1]:
+标签： 数学 英语 Markdown
 
-The *Gamma function* satisfying $\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N$ is via the Euler integral
+或者
 
-$$
-\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
-$$
+Tags： 数学 英语 Markdown
 
-> **Tip:** Make sure you include **MathJax** into your publications to render mathematical expression properly. Your page/template should include something like this:
+### 3. 删除线
+
+使用 ~~ 表示删除线。
+
+~~这是一段错误的文本。~~
+
+### 4. 注脚
+
+使用 [^keyword] 表示注脚。
+
+这是一个注脚[^footnote]的样例。
+
+这是第二个注脚[^footnote2]的样例。
+
+### 5. LaTeX 公式
+
+$ 表示行内公式： 
+
+质能守恒方程可以用一个很简洁的方程式 $E=mc^2$ 来表达。
+
+$$ 表示整行公式：
+
+$$\sum_{i=1}^n a_i=0$$
+
+$$f(x_1,x_x,\ldots,x_n) = x_1^2 + x_2^2 + \cdots + x_n^2 $$
+
+$$\sum^{j-1}_{k=0}{\widehat{\gamma}_{kj} z_k}$$
+
+访问 [MathJax](http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference) 参考更多使用方法。
+
+### 6. 加强的代码块
+
+支持四十一种编程语言的语法高亮的显示，行号显示。
+
+非代码示例：
 
 ```
-<script type="text/javascript" src="https://stackedit.io/libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+$ sudo apt-get install vim-gnome
 ```
 
-> **Note:** You can find more information about **LaTeX** mathematical expressions [here][4].
+Python 示例：
 
+```python
+@requires_authorization
+def somefunc(param1='', param2=0):
+    '''A docstring'''
+    if param1 > param2: # interesting
+        print 'Greater'
+    return (param2 - param1 + 1) or None
 
-### UML diagrams
+class SomeClass:
+    pass
 
-You can also render sequence diagrams like this:
-
-```sequence
-Alice->Bob: Hello Bob, how are you?
-Note right of Bob: Bob thinks
-Bob-->Alice: I am good thanks!
+>>> message = '''interpreter
+... prompt'''
 ```
 
-And flow charts like this:
+JavaScript 示例：
 
-```flow
-st=>start: Start
-e=>end
-op=>operation: My Operation
-cond=>condition: Yes or No?
+``` javascript
+/**
+* nth element in the fibonacci series.
+* @param n >= 0
+* @return the nth element, >= 0.
+*/
+function fib(n) {
+  var a = 1, b = 1;
+  var tmp;
+  while (--n >= 0) {
+    tmp = a;
+    a += b;
+    b = tmp;
+  }
+  return a;
+}
 
-st->op->cond
-cond(yes)->e
-cond(no)->op
+document.write(fib(10));
 ```
 
-> **Note:** You can find more information:
+### 7. 表格支持
 
-> - about **Sequence diagrams** syntax [here][7],
-> - about **Flow charts** syntax [here][8].
+示例：
 
-  [^stackedit]: [StackEdit](https://stackedit.io/) is a full-featured, open-source Markdown editor based on PageDown, the Markdown library used by Stack Overflow and the other Stack Exchange sites.
+| 项目        | 价格   |  数量  |
+| --------   | -----:  | :----:  |
+| 计算机     | $1600 |   5     |
+| 手机        |   $12   |   12   |
+| 管线        |    $1    |  234  |
 
-  [^gfm]: **GitHub Flavored Markdown** (GFM) is supported by StackEdit.
+
+### 8. 定义型列表
+
+名词 1
+:   定义 1（左侧有一个可见的冒号和四个不可见的空格）
+
+代码块 2
+:   这是代码块的定义（左侧有一个可见的冒号和四个不可见的空格）
+
+        代码块（左侧有八个不可见的空格）
+
+[^footnote]: 这是一个 *注脚* 的 **文本**。
+
+[^footnote2]: 这是另一个 *注脚* 的 **文本**。
+
+### 9. Html 标签
+
+本站支持在 Markdown 语法中嵌套 Html 标签，譬如，你可以用 Html 写一个纵跨两行的表格：
+
+    <table>
+        <tr>
+            <th rowspan="2">值班人员</th>
+            <th>星期一</th>
+            <th>星期二</th>
+            <th>星期三</th>
+        </tr>
+        <tr>
+            <td>李强</td>
+            <td>张明</td>
+            <td>王平</td>
+        </tr>
+    </table>
 
 
-  [1]: http://math.stackexchange.com/
-  [2]: http://daringfireball.net/projects/markdown/syntax "Markdown"
-  [3]: https://github.com/jmcmanus/pagedown-extra "Pagedown Extra"
-  [4]: http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference
-  [5]: https://code.google.com/p/google-code-prettify/
-  [6]: http://highlightjs.org/
-  [7]: http://bramp.github.io/js-sequence-diagrams/
-  [8]: http://adrai.github.io/flowchart.js/
+<table>
+    <tr>
+        <th rowspan="2">值班人员</th>
+        <th>星期一</th>
+        <th>星期二</th>
+        <th>星期三</th>
+    </tr>
+    <tr>
+        <td>李强</td>
+        <td>张明</td>
+        <td>王平</td>
+    </tr>
+</table>
+
+### 10. 内嵌图标
+
+本站的图标系统对外开放，在文档中输入
+
+    <i class="icon-weibo"></i>
+
+即显示微博的图标： <i class="icon-weibo icon-2x"></i>
+
+替换 上述 `i 标签` 内的 `icon-weibo` 以显示不同的图标，例如：
+
+    <i class="icon-renren"></i>
+
+即显示人人的图标： <i class="icon-renren icon-2x"></i>
+
+更多的图标和玩法可以参看 [font-awesome](http://fortawesome.github.io/Font-Awesome/3.2.1/icons/) 官方网站。
