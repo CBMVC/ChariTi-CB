@@ -1,0 +1,7 @@
+<Alloy>
+    <Window class="bg-transparent bg-25">
+            <View id="container" class="container t-10 lo-composite">
+                <!-- Content to be put here programatically -->
+            </View>
+    </Window>
+</Alloy>

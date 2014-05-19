@@ -9,8 +9,10 @@
     "isMultiLanguage": true,
     "startupScreen": 3,
     "tabletSupport": false,
-    "useDefaultSettingButton": true,
+    "cacheDuration": 5,
+    "useDefaultSettingButton": false,
     "logToDB": false,
+    "useHoverTabIcon": true,
 	"legal": {
 		"copyright": "Copyright ‌2013 ChariTi",
 		"terms": "http://www.appcelerator.com/legal/terms-conditions/",
@@ -28,7 +30,7 @@
 			"primary": "#327B9F",
 			"secondary": "#569BBE"
 		},
-		"useSlideMenu": true
+		"useSlideMenu": false
 	},
 	"manifest": [
 		"http://chariti.mobi/app/logo.png",

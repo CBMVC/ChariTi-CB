@@ -31,7 +31,7 @@ var APP = {
 	 * ChariTi-CB  version
 	 * @type {String}
 	 */
-	CBCVERSION: "1.0.1",
+	CBCVERSION: "1.2",
 	/**
 	 * ChariTi framework version
 	 * @type {String}
@@ -126,6 +126,11 @@ var APP = {
 	 */
 	Database: 'ChariTi',
 	/**
+	 * The globals cache duration
+	 * @type {Number}
+	 */
+	CacheDuration: null,
+	/**
 	 * All the component nodes (e.g. tabs)
 	 * @type {Object}
 	 */
@@ -151,6 +156,11 @@ var APP = {
 	 *  Set true will save the log in database
 	 */
 	LogToDB: false,
+	/**
+	 * The cache model
+	 * @type {[type]}
+	 */
+	CacheModel: null,
 	/**
 	 * Device information
 	 * @type {Object}
@@ -283,6 +293,11 @@ var APP = {
 	 * @type {Object}
 	 */
 	Tabs: null,
+	/**
+	 * Use the hover image for tab icon
+	 * @type {Boolean}
+	 */
+	useHoverTabIcon: null,
 	/**
 	 * Slide Menu widget
 	 * @type {Object}
@@ -466,6 +481,8 @@ var APP = {
 		APP.StartupScreen = data.startupScreen;
 		APP.AppStoreLink = data.appStoreLink;
 		APP.GooglePlayLink = data.googlePlayLink;
+		APP.CacheDuration = data.cacheDuration;
+		APP.useHoverTabIcon = data.useHoverTabIcon;
 
 		APP.Settings = data.settings;
 		APP.Nodes = data.tabs;
@@ -492,6 +509,7 @@ var APP = {
 		//init default language
 		if(APP.IsMultiLanguage) {
 			var lang = Ti.App.Properties.getString('lang');
+			//APP.log('info', lang, 'line 495');
 			if(lang === null) {
 				lang = APP.DefaultLanguage;
 				Ti.App.Properties.setString('lang', lang);
@@ -503,6 +521,9 @@ var APP = {
 		} else {
 			APP.ImagesFolder = '/images/';
 		}
+
+		//init the cache model
+		APP.CacheModel.init();
 
 		APP.log('info', 'Ti.Filesystem.applicationDataDirectory:' + Ti.Filesystem.applicationDataDirectory);
 		//APP.log('info', 'Ti.Filesystem.resourcesDirectory:' + Ti.Filesystem.resourcesDirectory);
@@ -524,16 +545,29 @@ var APP = {
 		// }
 
 		for(var i = 0, x = APP.Nodes.length; i < x; i++) {
-			var tabImage = imageFolder + APP.Nodes[i].image + ".png";
-			if(APP.Nodes[i].isMultiLanguage) {
-				tabImage = langImageFolder + APP.Nodes[i].image + ".png";
+			var tabImage;
+			if(APP.useHoverTabIcon) {
+				tabImage = imageFolder + APP.Nodes[i].image + "_off.png";
+				if(APP.Nodes[i].isMultiLanguage) {
+					tabImage = langImageFolder + APP.Nodes[i].image + "_off.png";
+				}
+			} else {
+				tabImage = imageFolder + APP.Nodes[i].image + ".png";
+				if(APP.Nodes[i].isMultiLanguage) {
+					tabImage = langImageFolder + APP.Nodes[i].image + ".png";
+				}
 			}
+			//APP.log('info', tabImage, '546 in core');
 			nodes.push({
 				id: i,
 				title: APP.IsMultiLanguage ? APP.L(APP.Nodes[i].title) : APP.Nodes[i].title,
 				image: UTIL.fileExists(tabImage) ? tabImage : null,
+				iconName: APP.Nodes[i].image,
 				controller: APP.Nodes[i].type.toLowerCase(),
-				menuHeader: APP.Nodes[i].menuHeader
+				menuHeader: APP.Nodes[i].menuHeader,
+				width: APP.Nodes[i].width ? APP.Nodes[i].width : null,
+				height: APP.Nodes[i].height ? APP.Nodes[i].height : null,
+				top: APP.Nodes[i].top ? APP.Nodes[i].top : null
 			});
 
 			if(APP.Settings.useSlideMenu && APP.Nodes[i].menuHeader) {
@@ -547,7 +581,7 @@ var APP = {
 				nodes.push({
 					id: "settings",
 					title: "Settings",
-					image: "/icons/white/settings.png",
+					image: tabImage + "settings.png",
 					menuHeader: hasMenuHeaders ? "Application" : null
 				});
 			}
@@ -563,9 +597,9 @@ var APP = {
 	 */
 	buildTabs: function(_nodes) {
 		APP.log("debug", "APP.buildTabs");
-
 		APP.Tabs.init({
 			nodes: _nodes,
+			useHoverTabIcon: APP.useHoverTabIcon,
 			more: APP.Settings.colors.theme == "dark" ? "/icons/white/more.png" : "/icons/black/more.png",
 			color: {
 				background: APP.Settings.colors.primary,
@@ -826,7 +860,7 @@ var APP = {
 
 				//APP.log('info', screen.isChild, 'sereen is child line 835 core.js');
 				// Add the screen to the window
-				APP.addScreen(screen);
+				APP.addScreen(screen, APP.AnimationStyle.Fade);
 
 				// Reset the modal stack
 				APP.modalStack = [];
@@ -873,8 +907,11 @@ var APP = {
 		} else {
 			APP.addDetailScreen(screen, _params.animation);
 		}
-
-		APP.log("debug", stack.length, "stack length line 870:");
+		//execute the on onOpened event
+		if(screen.onOpened) {
+			screen.onOpened();
+		}
+		APP.log("debug", stack.length, "stack length line 896:");
 	},
 	/**
 	 * Removes a child screen
@@ -894,18 +931,22 @@ var APP = {
 			}
 		}
 		//default just remove one screen
-		var removeIndex = stack.length - 1;
-		if(_params.toIndex) {
+		var stackLength = stack.length - 1;
+		var removeIndex = stackLength;
+		if(_params.controller) {
 			//remove to the define index screen
-			removeIndex = _params.toIndex;
-		}
-		var previousStack;
-		var previousScreen;
-		var stackLength = stack.length;
-		//popup the stacks
-		for(var removeItem = removeIndex; removeItem < stackLength; removeItem++) {
+			removeIndex = stack.getIndexBy('name', _params.controller);
+			//popup the stacks
+			for(var removeItem = removeIndex; removeItem < stackLength; removeItem++) {
+				stack.pop();
+			}
+		} else {
+			//just remove one screen
 			stack.pop();
 		}
+		APP.log('debug', APP.currentStack, 'remove index');
+		var previousStack;
+		var previousScreen;
 
 		if(stack.length === 0) {
 			previousStack = APP.controllerStacks[APP.currentStack];
@@ -926,7 +967,8 @@ var APP = {
 		} else {
 
 			previousScreen = stack[stack.length - 1];
-
+			//APP.previousScreen = previousScreen;
+			APP.log('debug', previousScreen.name, 'core 952', true);
 			if(APP.Device.isHandheld || !APP.hasDetail) {
 				APP.addScreen(previousScreen, _params.animation);
 			} else {
@@ -937,6 +979,12 @@ var APP = {
 				}
 			}
 		}
+		//execute the on loaded event
+		if(previousScreen.onLoaded) {
+			previousScreen.onLoaded();
+		}
+
+		APP.log('debug', stack.length, 'stack.length');
 	},
 	/**
 	 * Removes all children screens
@@ -955,162 +1003,243 @@ var APP = {
 	 * Global function to add a screen
 	 * @param {Object} _screen The screen to add
 	 */
-	addScreen: function(_screen, animationStyle) {
-		if(_screen) {
-			//APP.log('info', animationStyle, 'current animationStyle', true);
-			if(animationStyle && APP.Settings.useSlideMenu) {
-				APP.SlideMenu.hide();
-				APP.log('info', 'hide slide menu in core line 946');
-			}
-			switch(animationStyle) {
-				case APP.AnimationStyle.Fade:
-					_screen.opacity = 0;
-					APP.ContentWrapper.add(_screen);
-					Animator.fade({
-						view: _screen,
-						value: 1,
-						onComplete: function() {
-							if(animationStyle && APP.Settings.useSlideMenu) {
-								APP.SlideMenu.show();
-							}
-							if(APP.previousScreen) {
-								APP.removeScreen(APP.previousScreen);
-							}
-							APP.previousScreen = _screen;
-						}
-					});
-					break;
-				case APP.AnimationStyle.SlideRight:
-					APP.log('debug', 'SlideRight APP.previousScreen');
-					Animator.moveTo({
-						view: APP.previousScreen,
-						value: {
-							x: -APP.Device.width,
-							y: 0
-						},
-						onComplete: function() {
-							if(animationStyle && APP.Settings.useSlideMenu) {
-								APP.SlideMenu.show();
-							}
-							APP.ContentWrapper.add(_screen);
-							//reset the view position
-							Animator.moveTo({
-								view: APP.previousScreen,
-								duration: 0,
-								value: {
-									x: 0,
-									y: 0
-								}
-							});
-							APP.removeScreen(APP.previousScreen);
-							APP.previousScreen = _screen;
-						}
-					});
-					break;
-				case APP.AnimationStyle.SlideLeft:
-					APP.log('debug', 'SlideLeft APP.previousScreen');
-					Animator.moveTo({
-						view: APP.previousScreen,
-						value: {
-							x: APP.Device.width,
-							y: 0
-						},
-						onComplete: function() {
-							if(animationStyle && APP.Settings.useSlideMenu) {
-								APP.SlideMenu.show();
-							}
-							APP.ContentWrapper.add(_screen);
-							//reset the view position
-							Animator.moveTo({
-								view: APP.previousScreen,
-								duration: 0,
-								value: {
-									x: 0,
-									y: 0
-								}
-							});
-							APP.removeScreen(APP.previousScreen);
-							APP.previousScreen = _screen;
-						}
-					});
-					break;
-				case APP.AnimationStyle.SlideUp:
-					APP.log('debug', 'SlideUp APP.previousScreen');
-					Animator.moveTo({
-						view: APP.previousScreen,
-						duration: 450,
-						value: {
-							x: 0,
-							y: -APP.Device.height
-						},
-						onComplete: function() {
-							if(animationStyle && APP.Settings.useSlideMenu) {
-								APP.SlideMenu.show();
-							}
-							APP.ContentWrapper.add(_screen);
-							//reset the view position
-							Animator.moveTo({
-								view: APP.previousScreen,
-								duration: 0,
-								value: {
-									x: 0,
-									y: 0
-								}
-							});
-							APP.removeScreen(APP.previousScreen);
-							APP.previousScreen = _screen;
-						}
-					});
-					break;
-				case APP.AnimationStyle.SlideDown:
-					APP.log('debug', 'SlideDown APP.previousScreen');
-					Animator.moveTo({
-						view: APP.previousScreen,
-						duration: 450,
-						value: {
-							x: 0,
-							y: APP.Device.height
-						},
-						onComplete: function() {
-							if(animationStyle && APP.Settings.useSlideMenu) {
-								APP.SlideMenu.show();
-							}
-							APP.ContentWrapper.add(_screen);
-							//reset the view position
-							Animator.moveTo({
-								view: APP.previousScreen,
-								duration: 0,
-								value: {
-									x: 0,
-									y: 0
-								}
-							});
-							APP.removeScreen(APP.previousScreen);
-							APP.previousScreen = _screen;
-						}
-					});
-					break;
-				default:
-					APP.ContentWrapper.add(_screen);
+	addScreen: function(_screen, animationStyle, callback) {
+        if(_screen) {
+            //APP.log('info', animationStyle, 'current animationStyle', true);
+            if(animationStyle && APP.Settings.useSlideMenu) {
+                APP.SlideMenu.hide();
+                APP.log('info', 'hide slide menu in core line 946');
+            }
+            switch(animationStyle) {
+                case APP.AnimationStyle.Fade:
+                    _screen.opacity = 0;
+                    APP.ContentWrapper.add(_screen);
+                    Animator.fade({
+                        view: _screen,
+                        value: 1,
+                        onComplete: function() {
+                            if(animationStyle && APP.Settings.useSlideMenu) {
+                                APP.SlideMenu.show();
+                            }
+                            _screen.opacity = 1;
+                            APP.removeScreen(APP.previousScreen);
+                            APP.previousScreen = _screen;
 
-					if(APP.previousScreen) {
-						APP.removeScreen(APP.previousScreen);
-					}
+                            _screen.onOpened && _screen.onOpened();
+                            callback && callback();
+                        }
+                    });
+                    break;
+                case APP.AnimationStyle.NavLeft:
+                    //_screen.opacity = 0;
+                    _screen.left = APP.Device.width;
+                    APP.ContentWrapper.add(_screen);
 
-					APP.previousScreen = _screen;
-					break;
-			}
-		}
-	},
+                    APP.previousScreen.left = 0;
+                    APP.previousScreen.width = APP.Device.width;
+
+                    APP.ContentWrapper.children[1].left = APP.Device.width;
+                    APP.ContentWrapper.width = APP.Device.width * 2;
+                    APP.ContentWrapper.left = 0;
+
+                    APP.ContentWrapper.animate({
+                        left: -APP.Device.width,
+                        duration: 500
+                    }, function() {
+                        _screen.left = 0;
+                        APP.ContentWrapper.left = 0;
+                        APP.ContentWrapper.width = APP.Device.width;
+                        APP.removeScreen(APP.previousScreen);
+                        APP.previousScreen = _screen;
+
+                        _screen.onOpened && _screen.onOpened();
+                        callback && callback();
+                    });
+
+                    break;
+                case APP.AnimationStyle.NavRight:
+
+                    APP.ContentWrapper.width = APP.Device.width * 2;
+                    APP.ContentWrapper.left = -APP.Device.width;
+                    APP.ContentWrapper.children[0].zIndex = 100;
+                    APP.ContentWrapper.children[0].left = APP.Device.width;
+
+                    _screen.zIndex = 0;
+                    APP.ContentWrapper.add(_screen);
+
+                    APP.ContentWrapper.children[1].left = 0;
+
+                    //APP.previousScreen.left = APP.Device.width;
+                    //_screen.left = 0;
+
+                    APP.ContentWrapper.animate({
+                        left: 0,
+                        duration: 500
+                    }, function() {
+                        _screen.left = 0;
+                        APP.ContentWrapper.left = 0;
+                        APP.ContentWrapper.width = APP.Device.width;
+                        APP.removeScreen(APP.previousScreen);
+                        APP.previousScreen = _screen;
+
+                        _screen.onOpened && _screen.onOpened();
+                        callback && callback();
+                    });
+
+                    break;
+                case APP.AnimationStyle.SlideRight:
+                    APP.log('debug', 'SlideRight APP.previousScreen');
+                    Animator.moveTo({
+                        view: APP.previousScreen,
+                        value: {
+                            x: -(OS_ANDROID ? APP.Device.width * 2 : APP.Device.width),
+                            y: 0
+                        },
+                        onComplete: function() {
+                            if(animationStyle && APP.Settings.useSlideMenu) {
+                                APP.SlideMenu.show();
+                            }
+                            APP.ContentWrapper.add(_screen);
+                            //reset the view position
+                            Animator.moveTo({
+                                view: APP.previousScreen,
+                                duration: 0,
+                                value: {
+                                    x: 0,
+                                    y: 0
+                                }
+                            });
+
+                            APP.removeScreen(APP.previousScreen);
+                            APP.previousScreen = _screen;
+
+                            _screen.onOpened && _screen.onOpened();
+                            callback && callback();
+                        }
+                    });
+                    break;
+                case APP.AnimationStyle.SlideLeft:
+                    APP.log('debug', 'SlideLeft APP.previousScreen');
+                    Animator.moveTo({
+                        view: APP.previousScreen,
+                        value: {
+                            x: (OS_ANDROID ? APP.Device.width * 2 : APP.Device.width),
+                            y: 0
+                        },
+                        onComplete: function() {
+                            if(animationStyle && APP.Settings.useSlideMenu) {
+                                APP.SlideMenu.show();
+                            }
+                            APP.ContentWrapper.add(_screen);
+                            //reset the view position
+                            Animator.moveTo({
+                                view: APP.previousScreen,
+                                duration: 0,
+                                value: {
+                                    x: 0,
+                                    y: 0
+                                }
+                            });
+
+                            APP.removeScreen(APP.previousScreen);
+                            APP.previousScreen = _screen;
+
+                            _screen.onOpened && _screen.onOpened();
+                            callback && callback();
+                        }
+                    });
+                    break;
+                case APP.AnimationStyle.SlideUp:
+                    APP.log('debug', 'SlideUp APP.previousScreen');
+                    Animator.moveTo({
+                        view: APP.previousScreen,
+                        duration: 450,
+                        value: {
+                            x: 0,
+                            y: -APP.Device.height
+                        },
+                        onComplete: function() {
+                            if(animationStyle && APP.Settings.useSlideMenu) {
+                                APP.SlideMenu.show();
+                            }
+                            APP.ContentWrapper.add(_screen);
+                            //reset the view position
+                            Animator.moveTo({
+                                view: APP.previousScreen,
+                                duration: 0,
+                                value: {
+                                    x: 0,
+                                    y: 0
+                                }
+                            });
+                            APP.removeScreen(APP.previousScreen);
+                            APP.previousScreen = _screen;
+
+                            _screen.onOpened && _screen.onOpened();
+                            callback && callback();
+                        }
+                    });
+                    break;
+                case APP.AnimationStyle.SlideDown:
+                    APP.log('debug', 'SlideDown APP.previousScreen');
+                    Animator.moveTo({
+                        view: APP.previousScreen,
+                        duration: 450,
+                        value: {
+                            x: 0,
+                            y: APP.Device.height
+                        },
+                        onComplete: function() {
+                            if(animationStyle && APP.Settings.useSlideMenu) {
+                                APP.SlideMenu.show();
+                            }
+                            APP.ContentWrapper.add(_screen);
+                            //reset the view position
+                            Animator.moveTo({
+                                view: APP.previousScreen,
+                                duration: 0,
+                                value: {
+                                    x: 0,
+                                    y: 0
+                                }
+                            });
+                            APP.removeScreen(APP.previousScreen);
+                            APP.previousScreen = _screen;
+
+                            _screen.onOpened && _screen.onOpened();
+                            callback && callback();
+                        }
+                    });
+                    break;
+                default:
+                    APP.log('debug', _screen.name, '_screen name line 1130');
+                    APP.ContentWrapper.add(_screen);
+
+                    if(APP.previousScreen) {
+                        APP.removeScreen(APP.previousScreen);
+                    }
+
+                    APP.previousScreen = _screen;
+
+                    _screen.onOpened && _screen.onOpened();
+                    callback && callback();
+                    break;
+            }
+        }
+    },
 	/**
 	 * Global function to remove a screen
 	 * @param {Object} _screen The screen to remove
 	 */
 	removeScreen: function(_screen) {
 		if(_screen) {
-			APP.ContentWrapper.remove(_screen);
+			if(_screen.onClosed) {
+				_screen.onClosed();
+			}
 
+			APP.ContentWrapper.remove(_screen);
 			APP.previousScreen = null;
+			_screen = null;
 		}
 	},
 	/**
@@ -1459,8 +1588,25 @@ var APP = {
 		//slide with up animation, just like a popup modle windows
 		SlideUp: 4,
 		//slide with down animation, just like close a modle windows
-		SlideDown: 5
+		SlideDown: 5,
+        //navigate with left animation, it's same with ios navigation group animation
+        NavLeft: 6,
+        //navigate with right animation, it's same with ios navigation group animation
+        NavRight: 7
 	}
 };
 
+/**
+ * Find the object's index in the array
+ * @param  {[type]} name  [description]
+ * @param  {[type]} value [description]
+ * @return {[type]}       [description]
+ */
+Array.prototype.getIndexBy = function(name, value) {
+	for(var i = 0; i < this.length; i++) {
+		if(this[i][name] == value) {
+			return i;
+		}
+	}
+}
 module.exports = APP;

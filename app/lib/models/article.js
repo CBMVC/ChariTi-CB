@@ -24,7 +24,13 @@ function Model() {
 
 		var db = Ti.Database.open(APP.Database);
 
-		db.execute("CREATE TABLE IF NOT EXISTS article_" + TID + " (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, date TEXT, description TEXT, link TEXT, image TEXT);");
+		db.execute("CREATE TABLE IF NOT EXISTS article_" + TID + " (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT,
+            date TEXT,
+            description TEXT,
+            link TEXT,
+            image TEXT);");
 
 		db.close();
 	};
@@ -92,7 +98,9 @@ function Model() {
 					image = UTIL.escapeString(nodes.item(i).getElementsByTagName("media:content").item(0).attributes.getNamedItem("url").nodeValue);
 				}
 
-				db.execute("INSERT INTO article_" + TID + " (id, title, date, description, link, image) VALUES (NULL, " + title + ", " + date + ", " + description + ", " + link + ", " + image + ");");
+				db.execute("INSERT INTO article_" + TID + "
+                    (id, title, date, description, link, image) VALUES (NULL,
+                        " + title + ", " + date + ", " + description + ", " + link + ", " + image + ");");
 			}
 
 			db.execute("INSERT OR REPLACE INTO updates (url, time) VALUES(" + UTIL.escapeString(_url) + ", " + new Date().getTime() + ");");

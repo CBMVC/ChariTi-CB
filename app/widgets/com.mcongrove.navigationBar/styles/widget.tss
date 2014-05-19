@@ -16,7 +16,8 @@
 	height: Ti.UI.FILL,
 	width: Ti.UI.FILL,
 	left: "0dp",
-	top: "0dp"
+	top: "0dp",
+    zIndex: 1
 },
 "#left": {
 	top: "0dp",

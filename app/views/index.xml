@@ -1,10 +1,10 @@
 <Alloy>
 	<Window id="MainWindow">
 		<Require type="widget" src="com.mcongrove.slideMenu" id="SlideMenu" />
-		
+
 		<View id="GlobalWrapper">
 			<View id="ContentWrapper" />
-			
+
 			<Require type="widget" src="com.mcongrove.tabs" id="Tabs" />
 		</View>
 	</Window>
