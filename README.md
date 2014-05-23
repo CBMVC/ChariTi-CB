@@ -9,7 +9,7 @@ The ChariTi-CB version will synchronizes with ChariTi.
 
 # Version 1.2 Changs
 
- 1. Add a cache function. It will add the object and data into local sqliste database.
+1. Add a cache function. It will add the object and data into local sqliste database.
 
     ***How to use:***
 
@@ -62,62 +62,18 @@ The ChariTi-CB version will synchronizes with ChariTi.
     },
     ```
 
-5. Integrate [wriststrap](https://github.com/TNuzzi/wriststrap) layout framework. This is a awesome framework for the layout and tss, it use the css style for the view, but there are some feature not support android, but most of them is works.
+5. Integrate [wriststrap](https://github.com/TNuzzi/wriststrap) layout framework. This is a awesome framework for the layout and tss, it use the css style for the view, but there are some features not support on android, but most of them is works.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-ChariTi-CB
-==========
-
-[ChariTi](https://github.com/mcongrove/ChariTi) is a great alloy framework, and it's open source!
-
-This is a ChariTi enhancement version by me, I have added more features within ChariTi framework :)
-
-The ChariTi-CB version will synchronizes with ChariTi.
-
-# Version 1.2 Changs
-
- 1. Add a cache function
-It will add the object and data into local sqliste database.
-***How to use:***
-
-	1) Add the `APP.CacheModel = require("models/cache")();` into your
-   /app/controller/index.js
-	2) Add object into cache:  `APP.CacheModel.set('cacheKey', object, 5);` , the last parameter is experied time, the unit is minutes.
-
- 2. Enhance the navigation function
- 3. Add a hover tab icon in the tab menu
- 4. Integrate [wriststrap](https://github.com/TNuzzi/wriststrap) layout
-    framework. This is a awesome framework for the layout and tss, it
-    use the css style for the view, but there are some feature not
-    support android, but most of them is works.
-
-
-
-
-##### How to use:
-    1) Add the `APP.CacheModel = require("models/cache")();` into your /app/controller/index.js
-    2) Add object into cache:  `APP.CacheModel.set('cacheKey', object, 5);` , the last parameter is experied time, the unit is minutes.
-    3) Get object from cache:  `APP.CacheModel.set('cacheKey')`
 
 # Version 1.0.1
 
 There are following enhancement with ChariTi-CB in version 1.0.1, base on ChariTi 1.2.2
 
 #### Enhance the remove children function. Please consider the following scenarios:
-    There are 4 screens, you need to use the `APP.addChild` to navigate them: `screen1 -> screen2 -> screen3 -> screen4`, after you go into screen4, and you want to back to screen2, by default ChariTi just can back one screen with the `APP.removeChild()` function, or you can use the `APP.addChild` to add to screen2, but in this way, the controller stack will keep to increase, so we should use the `APP.removeChild` for remove the screen4 and screen3 after switch back to screen2. In this case, I enhanced the `APP.removeChild` function to support remove to define screen:
 
+There are 4 screens, you need to use the `APP.addChild` to navigate them: `screen1 -> screen2 -> screen3 -> screen4`, after you go into screen4, and you want to back to screen2, by default ChariTi just can back one screen with the `APP.removeChild()` function, or you can use the `APP.addChild` to add to screen2, but in this way, the controller stack will keep to increase, so we should use the `APP.removeChild` for remove the screen4 and screen3 after switch back to screen2. In this case, I enhanced the `APP.removeChild` function to support remove to define screen:
+
+```javascript
         /**
          * Removes a child screen
          * @param {String} controller The controller name need to be back and remove from the stack
@@ -125,34 +81,44 @@ There are following enhancement with ChariTi-CB in version 1.0.1, base on ChariT
          * @param {Boolean} animation The animation of the navigation
          */
         removeChild: function(_params)
+```
 
-    For example, in the above case, just use the function like follow:
+For example, in the above case, just use the function like follow:
 
+```javascript
         APP.removeChild({
             controller: 'screen2',
             animation: APP.AnimationStyle.SlideLeft
         });
+```
 
 
 # Version 1.0
 
 There are following enhancement with ChariTi-CB in version 1.0, base on ChariTi 1.2.2
 
-#### 1. Support custom multiple language. You can switch the current language in the code and don't need to base on the phone setting.
+* Support custom multiple language. You can switch the current language in the code and don't need to base on the phone setting.
 
-##### How to use:
+    **How to use:**
+
     1) Set the default lanuguage in the /lib/data/app.json file:  `"defaultLanguage": "en",`
     2) Create the language key/value resource file and put in the /lib/langs folder, ect. `en.js`
+
     3) Use the `APP.L('langKey')` for display the language content.
+
     4) Use the `APP.switchLang('en');` to switch the current to `en`, and you can get the current language with `APP.CurrentLanguage`.
+
     5) For the tab text, the tab's title in the app.json file is the language resource's key.
+
     6) If you don't need to support multiple language, just set the `"isMultiLanguage"` to false in the app.json file.
 
-#### 2. Support slide left, right, top and down animation when you switch the page.
+* Support slide left, right, top and down animation when you switch the page.
 
-##### How to use:
-In ChariTi, you can use `APP.addChild` to switch the page, and in ChariTi-CB, I have enhance this function, the following is the function signature:
+    **How to use:**
 
+ In ChariTi, you can use `APP.addChild` to switch the page, and in ChariTi-CB, I have enhance this function, the following is the function signature:
+
+```javascript
     /**
      * Open a child screen
      * @param {String} controller The name of the controller to open
@@ -162,9 +128,11 @@ In ChariTi, you can use `APP.addChild` to switch the page, and in ChariTi-CB, I 
      * @param {Boolean} animation The animation of the navigation
      */
     addChild: function(_params)
+```
 
-You can pass the animation in to this function like follow:
+ You can pass the animation in to this function like follow:
 
+```javascript
     APP.addChild({
         controller: "article_article",
         params: {
@@ -173,9 +141,11 @@ You can pass the animation in to this function like follow:
         },
         animation: APP.AnimationStyle.SlideRight
     });
+```
 
-    And the animation style support following values:
+ And the animation style support following values:
 
+```javascript
     /*
      * Animation style
      * all animations are support ios and android
@@ -194,21 +164,25 @@ You can pass the animation in to this function like follow:
         //slide with down animation, just like close a modle windows
         SlideDown: 5
     }
+```
 
-When you use the slide right animation to next page, you should also want to use the slide left within the back function, so you can put the following code in the back button event:
+ When you use the slide right animation to next page, you should also want to use the slide left within the back function, so you can put the following code in the back button event:
 
+```javascript
     $.NavigationBar.showBack(function(_event) {
         APP.removeChild({
             animation: APP.AnimationStyle.SlideLeft
         });
     });
+```
 
-#### 3. You can change the Database name in the core.js file in line 122.
+* You can change the Database name in the core.js file in line 122.
 
-#### 4. For some reasons, maybe you don't want to use the ChariTi default setting button, so in this time, you can easy set the `useDefaultSettingButton` to false in the app.json file.
+* For some reasons, maybe you don't want to use the ChariTi default setting button, so in this time, you can easy set the `useDefaultSettingButton` to false in the app.json file.
 
-#### 5. Enhance the `APP.log` function. You can dump the js object in this function. Follow is the function signature:
+* Enhance the `APP.log` function. You can dump the js object in this function. Follow is the function signature:
 
+```javascript
     /**
      * Logs all console data
      * @param {String} _severity A severity type (debug, error, info, log, trace, warn)
@@ -217,8 +191,9 @@ When you use the slide right animation to next page, you should also want to use
      * @param {Bool} _dumpObj Show the object to log
      */
     log: function(_severity, _text, _positionDesc, _dumpObj)
+```
 
-For example, if you want to show the array object, you can use follow :
+ For example, if you want to show the array object, you can use follow :
 
     var tmpObj = {
         id: 1,
@@ -227,33 +202,10 @@ For example, if you want to show the array object, you can use follow :
 
     APP.log('debug', tmpObj, 'in test file line 10', true);
 
-Then the result will be:
+ Then the result will be:
 
     {id:1,name:'test'}=====in test file line 10
 
-#### 6. By default, ChariTi will save all debug(APP.log) information into DB, if you don't want to do it, you can set the `logToDB` to false in app.json.
+* By default, ChariTi will save all debug(APP.log) information into DB, if you don't want to do it, you can set the `logToDB` to false in app.json.
 
-#### 7. Enhance the update function, you can set the app store and google play url in app.json, if the `minimumVersion` is not support udpate, the app can popup the user go to the app store(android with google play) for download the app.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+* Enhance the update function, you can set the app store and google play url in app.json, if the `minimumVersion` is not support udpate, the app can popup the user go to the app store(android with google play) for download the app.
