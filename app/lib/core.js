@@ -753,10 +753,11 @@ var APP = {
 		APP.toggleMenu();
 	},
 	/**
-	 * Global event handler to change screens
-	 * @param {String} _id The ID (index) of the tab being opened
-	 */
-	handleNavigation: function(_id) {
+     * Global event handler to change screens
+     * @param {String} _id The ID (index) of the tab being opened
+     * @param {String} animation The animation style
+     */
+    handleNavigation: function(_id, animation) {
 		APP.log("debug", "APP.handleNavigation | " + APP.Nodes[_id].type);
 
 		// Requesting same screen as we're on
@@ -858,9 +859,12 @@ var APP = {
                     */
 				}
 
-				//APP.log('info', screen.isChild, 'sereen is child line 835 core.js');
-				// Add the screen to the window
-				APP.addScreen(screen, APP.AnimationStyle.Fade);
+				if(animation == null) {
+                    animation = APP.AnimationStyle.Fade;
+                }
+                //APP.log('info', screen.isChild, 'sereen is child line 835 core.js');
+                // Add the screen to the window
+                APP.addScreen(screen, animation);
 
 				// Reset the modal stack
 				APP.modalStack = [];
@@ -1151,37 +1155,43 @@ var APP = {
                     break;
                 case APP.AnimationStyle.SlideUp:
                     APP.log('debug', 'SlideUp APP.previousScreen');
+                    _screen.opacity = 0;
+                    APP.ContentWrapper.add(_screen);
                     Animator.moveTo({
-                        view: APP.previousScreen,
-                        duration: 450,
+                        view: _screen,
+                        duration: 0,
                         value: {
                             x: 0,
-                            y: -APP.Device.height
+                            y: APP.Device.height
                         },
                         onComplete: function() {
                             if(animationStyle && APP.Settings.useSlideMenu) {
                                 APP.SlideMenu.show();
                             }
-                            APP.ContentWrapper.add(_screen);
-                            //reset the view position
+                            _screen.opacity = 1;
                             Animator.moveTo({
-                                view: APP.previousScreen,
-                                duration: 0,
+                                view: _screen,
+                                duration: 450,
                                 value: {
                                     x: 0,
                                     y: 0
+                                },
+                                onComplete: function() {
+                                    APP.removeScreen(APP.previousScreen);
+                                    APP.previousScreen = _screen;
+
+                                    _screen.onOpened && _screen.onOpened();
+                                    callback && callback();
                                 }
                             });
-                            APP.removeScreen(APP.previousScreen);
-                            APP.previousScreen = _screen;
-
-                            _screen.onOpened && _screen.onOpened();
-                            callback && callback();
                         }
                     });
                     break;
                 case APP.AnimationStyle.SlideDown:
                     APP.log('debug', 'SlideDown APP.previousScreen');
+                    _screen.zIndex = 0;
+                    APP.previousScreen.zIndex = 1;
+                    APP.ContentWrapper.add(_screen);
                     Animator.moveTo({
                         view: APP.previousScreen,
                         duration: 450,
@@ -1193,7 +1203,7 @@ var APP = {
                             if(animationStyle && APP.Settings.useSlideMenu) {
                                 APP.SlideMenu.show();
                             }
-                            APP.ContentWrapper.add(_screen);
+                            //_screen.opacity = 1;
                             //reset the view position
                             Animator.moveTo({
                                 view: APP.previousScreen,
