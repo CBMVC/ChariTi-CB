@@ -12,7 +12,7 @@
     "cacheDuration": 5,
     "useDefaultSettingButton": false,
     "logToDB": false,
-    "useHoverTabIcon": true,
+    "useHoverTabIcon": false,
 	"legal": {
 		"copyright": "Copyright ‌2013 ChariTi",
 		"terms": "http://www.appcelerator.com/legal/terms-conditions/",
