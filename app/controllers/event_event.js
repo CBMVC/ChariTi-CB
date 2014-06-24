@@ -49,7 +49,7 @@ $.handleData = function(_data) {
 	if(APP.Device.isHandheld) {
 		$.NavigationBar.showBack(function(_event) {
 			APP.removeAllChildren({
-				animation: APP.AnimationStyle.SlideLeft
+				animation: APP.AnimationStyle.NavRight
 			});
 		});
 	}

@@ -48,7 +48,7 @@ $.init = function() {
 			//APP.removeChild(true);
 			APP.removeChild({
 				modal: true,
-				animation: APP.AnimationStyle.SlideLeft
+				animation: APP.AnimationStyle.NavRight
 			});
 		});
 	}
@@ -69,7 +69,7 @@ $.terms.addEventListener("click", function(_event) {
 			url: APP.LEGAL.TOS
 		},
 		modal: true
-		//animation: APP.AnimationStyle.SlideRight
+		//animation: APP.AnimationStyle.NavLeft
 	});
 });
 
@@ -87,7 +87,7 @@ $.privacy.addEventListener("click", function(_event) {
 			url: APP.LEGAL.PRIVACY
 		},
 		modal: true,
-		animation: APP.AnimationStyle.SlideRight
+		animation: APP.AnimationStyle.NavLeft
 	});
 });
 
@@ -98,7 +98,7 @@ $.acknowledgements.addEventListener("click", function(_event) {
 	APP.addChild({
 		controller: "settings_credits",
 		modal: true,
-		animation: APP.AnimationStyle.SlideRight
+		animation: APP.AnimationStyle.NavLeft
 	});
 });
 

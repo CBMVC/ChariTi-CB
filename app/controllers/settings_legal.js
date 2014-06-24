@@ -24,7 +24,7 @@ $.init = function() {
 	$.NavigationBar.showBack(function(_event) {
 		APP.removeChild({
 			modal: true,
-			animation: APP.AnimationStyle.SlideLeft
+			animation: APP.AnimationStyle.NavRight
 		});
 	});
 };

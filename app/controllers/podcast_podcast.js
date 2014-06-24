@@ -51,7 +51,7 @@ $.handleData = function(_data) {
 			$.streamStop();
 
 			APP.removeAllChildren({
-				animation: APP.AnimationStyle.SlideLeft
+				animation: APP.AnimationStyle.NavRight
 			});
 		});
 	}

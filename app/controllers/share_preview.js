@@ -18,7 +18,7 @@ $.NavigationBar.setBackgroundColor(APP.Settings.colors.primary);
 if(APP.Device.isHandheld) {
 	$.NavigationBar.showBack(function(_event) {
 		APP.removeChild({
-			animation: APP.AnimationStyle.SlideLeft
+			animation: APP.AnimationStyle.NavRight
 		});
 	});
 }

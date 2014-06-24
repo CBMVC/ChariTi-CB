@@ -32,7 +32,7 @@ $.init = function() {
 	if(CONFIG.isChild === true) {
 		$.NavigationBar.showBack(function(_event) {
 			APP.removeChild({
-				animation: APP.AnimationStyle.SlideLeft
+				animation: APP.AnimationStyle.NavRight
 			});;
 		});
 	}
@@ -121,7 +121,7 @@ $.handleVideos = function() {
 				title: data[0].title,
 				index: CONFIG.index
 			},
-			animation: APP.AnimationStyle.SlideRight
+			animation: APP.AnimationStyle.NavLeft
 		});
 	}
 };
@@ -151,7 +151,7 @@ $.container.addEventListener("click", function(_event) {
 				title: _event.row.setTitle,
 				index: CONFIG.index
 			},
-			animation: APP.AnimationStyle.SlideRight
+			animation: APP.AnimationStyle.NavLeft
 		});
 	} else if(OS_ANDROID) {
 		if(APP.Device.isTablet) {
@@ -167,7 +167,7 @@ $.container.addEventListener("click", function(_event) {
 					title: _event.row.setTitle,
 					index: CONFIG.index
 				},
-				animation: APP.AnimationStyle.SlideRight
+				animation: APP.AnimationStyle.NavLeft
 			});
 		}
 

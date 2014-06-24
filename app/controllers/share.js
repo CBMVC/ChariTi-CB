@@ -22,7 +22,7 @@ $.init = function() {
 	if(CONFIG.isChild === true) {
 		$.NavigationBar.showBack(function(_event) {
 			APP.removeChild({
-				animation: APP.AnimationStyle.SlideLeft
+				animation: APP.AnimationStyle.NavRight
 			});
 		});
 	}

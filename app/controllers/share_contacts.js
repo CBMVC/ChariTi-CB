@@ -34,7 +34,7 @@ $.init = function() {
 	if(APP.Device.isHandheld) {
 		$.NavigationBar.showBack(function(_event) {
 			APP.removeAllChildren({
-				animation: APP.AnimationStyle.SlideLeft
+				animation: APP.AnimationStyle.NavRight
 			});
 		});
 	}
@@ -173,11 +173,11 @@ $.createEmail = function(_addresses) {
 	email.addEventListener("complete", function(_event) {
 		if(APP.Device.isTablet) {
 			APP.removeChild({
-				animation: APP.AnimationStyle.SlideLeft
+				animation: APP.AnimationStyle.NavRight
 			});;
 		} else {
 			APP.removeAllChildren({
-				animation: APP.AnimationStyle.SlideLeft
+				animation: APP.AnimationStyle.NavRight
 			});
 		}
 	});
